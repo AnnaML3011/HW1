@@ -7,7 +7,7 @@ public class Player {
     public static enum Players {PLAYER1 , PLAYER2};
     private Players players;
     private CardDeck cardDeck;
-    private int score;
+    private int score = 0;
 
     public Player(Players players) {
         this.players = players;

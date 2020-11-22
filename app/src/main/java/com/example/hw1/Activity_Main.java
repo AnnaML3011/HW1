@@ -30,10 +30,10 @@ public class Activity_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViews();
+        createPlayers();
         initViews();
         createCards();
         showCards();
-        createPlayers();
         shuffleAndCreateDeck();
         showPlayers();
 
@@ -84,8 +84,12 @@ public class Activity_Main extends AppCompatActivity {
         start_game_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                start_game();
+                if(players.get(0).getCardDeck().deckIsEmpty() == 0 || players.get(1).getCardDeck().deckIsEmpty() == 0){
+                    Log.d("aaa","true");
+                    checkWinner();
+                }else {
+                    start_game();
+                }
             }
         });
     }
@@ -118,29 +122,28 @@ public class Activity_Main extends AppCompatActivity {
 
     private void showCards(){
         for(Card card : cards){
-            System.out.println(card);
+           // System.out.println(card);
         }
     }
     private void showPlayers(){
         for(Player player : players){
-            System.out.println(player);
+           // System.out.println(player);
         }
     }
     private void start_game() {
-        String name1 = players.get(0).getCardDeck().getCard().toString();
-        String name2 = players.get(1).getCardDeck().getCard().toString();
-        int id1 = getResources().getIdentifier(name1,"id","drawable");
-        System.err.println(id1);
+        Card card1 = players.get(0).getCardDeck().getCard();
+        Card card2 = players.get(1).getCardDeck().getCard();
+        String nameCard1 = card1.getType() + "_" + card1.getValue();
+        String nameCard2 = card2.getType() + "_" + card2.getValue();
+        int id1 = getResources().getIdentifier(nameCard1,"drawable", getPackageName());
+        int id2 = getResources().getIdentifier(nameCard2,"drawable", getPackageName());
         first_IMG_card.setImageResource(id1);
-        int id2 = getResources().getIdentifier(name2,"id","drawable");
-        System.err.println(id2);
         seconed_IMG_card.setImageResource(id2);
-        calculateScore();
-        checkWinner();
+        calculateScore(card1, card2);
     }
-     private void calculateScore(){
-         int cardValue1 = players.get(0).getCardDeck().getCard().getValue();
-         int cardValue2= players.get(1).getCardDeck().getCard().getValue();
+     private void calculateScore(Card c1, Card c2){
+         int cardValue1 = c1.getValue();
+         int cardValue2= c2.getValue();
          if(cardValue1 > cardValue2){
              players.get(0).addPoint();
              score_LBL_1.setText("Score: " + players.get(0).getScore());
@@ -157,10 +160,13 @@ public class Activity_Main extends AppCompatActivity {
 
      public void checkWinner(){
         if(players.get(0).getScore() > players.get(1).getScore()){
-            System.out.println("1 - winner");
+            first_IMG_card.setImageResource(R.drawable.chip);
+            //System.out.println("1 - winner");
             //go the winner activity with player 1 name
         }else if(players.get(0).getScore() < players.get(1).getScore()){
-            System.out.println("2- winner");
+            seconed_IMG_card.setImageResource(R.drawable.chip);
+
+            // System.out.println("2- winner");
             //go to winner activity with player 2 name
         }else {
             //both winners
