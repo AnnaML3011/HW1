@@ -29,6 +29,12 @@ public class CardDeck {
     public Card getCard(){
         return cards.pop();
     }
+    public int deckIsEmpty(){
+        if(cards.empty()){
+            return 0;
+        }
+        return 1;
+    }
 
     public void addCard(List<Card> card) {
         this.cards.addAll(card);
