@@ -2,6 +2,7 @@ package com.example.hw1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -159,18 +160,25 @@ public class Activity_Main extends AppCompatActivity {
      }
 
      public void checkWinner(){
+        int score = 0; //1-player1 won, 2- player2 won, 3-teco
+        int player = 0;// 1-player1 , 2-player2 ,3- teco
         if(players.get(0).getScore() > players.get(1).getScore()){
-            first_IMG_card.setImageResource(R.drawable.chip);
-            //System.out.println("1 - winner");
-            //go the winner activity with player 1 name
+            score = 1;
+            player = 1;
         }else if(players.get(0).getScore() < players.get(1).getScore()){
-            seconed_IMG_card.setImageResource(R.drawable.chip);
-
-            // System.out.println("2- winner");
+            score = 2;
+            player = 2;
             //go to winner activity with player 2 name
         }else {
-            //both winners
+            score = 3;
+            player = 3;
         }
+        Intent myIntent = new Intent(Activity_Main.this, Activity_Winner.class);
+        myIntent.putExtra(Activity_Winner.PLAYER,player);
+        myIntent.putExtra(Activity_Winner.SCORE,score);
+        startActivity(myIntent);
+        finish();
+
      }
 
 }
