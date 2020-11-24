@@ -160,17 +160,17 @@ public class Activity_Main extends AppCompatActivity {
      }
 
      public void checkWinner(){
-        int score = 0; //1-player1 won, 2- player2 won, 3-teco
+        int score = 0;
         int player = 0;// 1-player1 , 2-player2 ,3- teco
         if(players.get(0).getScore() > players.get(1).getScore()){
-            score = 1;
+            score = players.get(0).getScore();
             player = 1;
         }else if(players.get(0).getScore() < players.get(1).getScore()){
-            score = 2;
+            score = players.get(1).getScore();
             player = 2;
             //go to winner activity with player 2 name
         }else {
-            score = 3;
+            score = players.get(1).getScore();
             player = 3;
         }
         Intent myIntent = new Intent(Activity_Main.this, Activity_Winner.class);

@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HW1">
         <activity android:name=".Activity_Main">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
