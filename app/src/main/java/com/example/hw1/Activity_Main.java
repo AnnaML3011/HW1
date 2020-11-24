@@ -13,7 +13,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/*
+Anna Meleshko -319346045
+ */
 public class Activity_Main extends AppCompatActivity {
 
     private final int NUM_OF_PLAYERS = 2;
@@ -34,10 +36,7 @@ public class Activity_Main extends AppCompatActivity {
         createPlayers();
         initViews();
         createCards();
-        showCards();
         shuffleAndCreateDeck();
-        showPlayers();
-
     }
 
     @Override
@@ -69,6 +68,7 @@ public class Activity_Main extends AppCompatActivity {
         Log.d("aaa","onDestroy");
         super.onDestroy();
     }
+
     private void findViews() {
         score_LBL_1 = findViewById(R.id.score_LBL_1);
         score_LBL_2 = findViewById(R.id.score_LBL_2);
@@ -81,7 +81,9 @@ public class Activity_Main extends AppCompatActivity {
     private void initViews() {
         score_LBL_1.setText("Score: " + players.get(0).getScore());
         score_LBL_2.setText("Score: " + players.get(1).getScore());
-
+    /*
+    on each click if we still have cards to pop,  call the function 'start game'.
+     */
         start_game_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +96,9 @@ public class Activity_Main extends AppCompatActivity {
             }
         });
     }
-
+    /*
+    Create Cards from Enums (4 types*14 values = 52 cards).
+     */
     private void createCards(){
         cards = new ArrayList<>();
         for (CardDeck.CardType type: CardDeck.CardType.values()) {
@@ -103,13 +107,18 @@ public class Activity_Main extends AppCompatActivity {
             }
         }
     }
+    /*
+       Create players as in the enum(player1,player2)
+     */
     private void createPlayers(){
         players = new ArrayList<>();
         for(Player.Players player: Player.Players.values()){
             players.add(new Player(player));
         }
     }
-
+    /*
+       shuffle the cards and for each player put half of the deck.
+     */
     private void shuffleAndCreateDeck(){
         Collections.shuffle(cards);
         int sizeOfDeckEachPlayer = NUM_OF_CARDS/NUM_OF_PLAYERS;
@@ -131,6 +140,10 @@ public class Activity_Main extends AppCompatActivity {
            // System.out.println(player);
         }
     }
+    /*
+       pop cards for each player for their deck(26 cards),
+        find image of that specific card, and than go check and caclcute the score.
+     */
     private void start_game() {
         Card card1 = players.get(0).getCardDeck().getCard();
         Card card2 = players.get(1).getCardDeck().getCard();
@@ -142,6 +155,10 @@ public class Activity_Main extends AppCompatActivity {
         seconed_IMG_card.setImageResource(id2);
         calculateScore(card1, card2);
     }
+    /*
+       check which player got higher card, add points to the player with the higher card value,
+       if both have the same value - add point to both of them.
+     */
      private void calculateScore(Card c1, Card c2){
          int cardValue1 = c1.getValue();
          int cardValue2= c2.getValue();
@@ -158,7 +175,9 @@ public class Activity_Main extends AppCompatActivity {
              score_LBL_2.setText("Score: " + players.get(1).getScore());
          }
      }
-
+        /*
+           check which player have higher final score, and go for next activity to show the winner.
+         */
      public void checkWinner(){
         int score = 0;
         int player = 0;// 1-player1 , 2-player2 ,3- teco

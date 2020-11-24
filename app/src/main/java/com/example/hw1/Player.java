@@ -9,6 +9,9 @@ public class Player {
     private CardDeck cardDeck;
     private int score = 0;
 
+    public Player() {
+    }
+
     public Player(Players players) {
         this.players = players;
         this.cardDeck = new CardDeck();
@@ -33,6 +36,18 @@ public class Player {
 
     public void addCardsToPlayerDeck(List<Card> card){
         this.getCardDeck().addCard(card);
+    }
+
+    public void setPlayers(Players players) {
+        this.players = players;
+    }
+
+    public void setCardDeck(CardDeck cardDeck) {
+        this.cardDeck = cardDeck;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     @Override

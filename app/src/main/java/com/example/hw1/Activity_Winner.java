@@ -32,7 +32,9 @@ public class Activity_Winner extends Activity {
         Winner_LBL = findViewById(R.id.Winner_LBL);
         Final_Score_LBL = findViewById(R.id.Final_Score_LBL);
     }
-
+    /*
+       get the score of each player, and the avatar of the winner to show on the screen
+     */
     private void initViews() {
         player = getIntent().getIntExtra(PLAYER, -1);
         score = getIntent().getIntExtra(SCORE,-1);
